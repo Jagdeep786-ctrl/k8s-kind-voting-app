@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: worker
-  name: worker
+  name: result
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: worker
+      app: result
   template:
     metadata:
       labels:
-        app: worker
+        app: result
     spec:
       containers:
-      - image: dockersamples/examplevotingapp_worker
-        name: worker
+      - name: result
+        image: jagdeep144/result_voting:latest
+        ports:
+        - containerPort: 80

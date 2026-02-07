@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: db
   name: db
 spec:
   replicas: 1
@@ -15,8 +13,8 @@ spec:
         app: db
     spec:
       containers:
-      - image: postgres:15-alpine
-        name: postgres
+      - name: postgres
+        image: postgres:15-alpine
         env:
         - name: POSTGRES_USER
           value: postgres
@@ -24,10 +22,9 @@ spec:
           value: postgres
         ports:
         - containerPort: 5432
-          name: postgres
-        volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: db-data
+        volumeMounts: 
+        - name: db-data  
+          mountPath: /var/lib/postgresql/data
       volumes:
       - name: db-data
         emptyDir: {} 
