@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd-project
+  namespace: argocd
+
+spec:
+  description: Project for voting app
+
+  # ✅ Allow this GitHub repo
+  sourceRepos:
+    - https://github.com/Jagdeep786-ctrl/k8s-kind-voting-app.git
+
+  # ✅ Where apps can be deployed
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: default
+
+  # ✅ Allow cluster-level resources (optional but useful for learning)
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+
+  # ✅ Allow namespace-level resources (optional)
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
